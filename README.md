@@ -17,7 +17,7 @@ lean源码版本，内核为***5.4和5.10***版
 > `ip：192.168.1.1 密码：password`
 
 ## 固件下载
-### 点击[Actions](https://github.com/ZiPenOk/openwrt-Exclusive/actions) 或者[Releases](https://github.com/ZiPenOk/openwrt-Exclusive/releases) 选择需要的版本
+### 点击[Actions](https://github.com/ZiPenOk/ZiPen-OpenWRT/actions) 或者[Releases](https://github.com/ZiPenOk/ZiPen-OpenWRT/releases) 选择需要的版本
 ![avatar](https://raw.githubusercontent.com/firkerword/openwrt-Exclusive/main/boc/c.png)
 
 ## 固件截图：
