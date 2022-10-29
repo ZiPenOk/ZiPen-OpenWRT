@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt-lede5.19
+name: OpenWrt-lede5.4
 
 on:
   repository_dispatch:
@@ -17,16 +17,15 @@ on:
         required: false
         default: 'false'
 #  schedule:
-#    - cron: 0 22 */3 * * 
+#    - cron: 0 18 */3 * *
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 5.1D.config
-  DIY_P1_SH: diy5.19.sh
-  DIY_P2_SH: diy-part.sh
-  SSH_ACTIONS: false
+  CONFIG_FILE: 5.4.config
+  DIY_P1_SH: diy5.4.sh
+  DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -48,7 +47,6 @@ jobs:
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq full-upgrade
         sudo -E apt-get -qq install $(curl -fsSL https://github.com/firkerword/openwrt-list/raw/master/depends-ubuntu-2004)
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
@@ -136,7 +134,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_6.0D${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt_5.4${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 上传固件到NN网盘
@@ -162,7 +160,6 @@ jobs:
       run: |
         echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
         touch release.txt
-        echo "含Docker、Passwall、Openclash、MosDNS、alist网盘挂载工具等插件。" >> release.txt
         echo "[固件源码](https://github.com/coolsnowwolf/lede)" >> release.txt
         echo "由衷感谢所有为openwrt无私奉献的大佬们" >> release.txt
         echo "📥 固件下载" >> release.txt
@@ -170,12 +167,12 @@ jobs:
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [国外WT网盘](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
     - name: 发布至release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@master
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
-        name: ${{ env.FILE_TIME }} 「 openwrt6.0-X86-64定制版 」
+        name: ${{ env.FILE_TIME }} 「 openwrt5.4-X86-64 」
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
@@ -194,7 +191,20 @@ jobs:
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        
-    - name: TG notification #TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=恭喜主人openwrt5.10定制版固件编译完成！"
 
+    - name: 微信报告
+      uses: emon100/Action-Serverchan@v2
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        SCKEY: ${{ secrets.SERVERCHAN }}
+        text: 恭喜主人openwrt5.4固件编译成功！
+        desp: 我亲爱的主人您要编译的固件成功完成了！
+              
+              
+              奶牛快传：${{ steps.cowtransfer.outputs.url }}
+              
+              
+              WeTransfer：${{ steps.wetransfer.outputs.url }}
+              
+              
+              Have a nice day.

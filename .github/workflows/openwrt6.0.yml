@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt-lede5.19
+name: OpenWrt-lede6.0
 
 on:
   repository_dispatch:
@@ -23,9 +23,9 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 5.1D.config
-  DIY_P1_SH: diy5.19.sh
-  DIY_P2_SH: diy-part.sh
+  CONFIG_FILE: 6.0D.config
+  DIY_P1_SH: diy6.0.sh
+  DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
@@ -61,6 +61,10 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        cd openwrt
+        useVersionInfo=$(git show -s --date=short --format="%0AAuthor: %an%0Adate: %cd%0Acommit: %s%0Acommit hash: %H")
+        echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
+        echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV   
     - name: 加载自定义设置
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
@@ -106,6 +110,7 @@ jobs:
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
         echo "FILE_TIME=$(date "+%Y年%m月%d日-%H点")" >> $GITHUB_ENV
+        echo "TAG_TIME=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
     - name: 查看磁盘使用情况
       if: (!cancelled())
       run: df -hT
@@ -155,30 +160,24 @@ jobs:
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
         echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
-        
-    - name: 创建release标签
-      id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      run: |
-        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        touch release.txt
-        echo "含Docker、Passwall、Openclash、MosDNS、alist网盘挂载工具等插件。" >> release.txt
-        echo "[固件源码](https://github.com/coolsnowwolf/lede)" >> release.txt
-        echo "由衷感谢所有为openwrt无私奉献的大佬们" >> release.txt
-        echo "📥 固件下载" >> release.txt
-        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [国内NN网盘](${{ steps.cowtransfer.outputs.url }})" >> release.txt
-        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [国外WT网盘](${{ steps.wetransfer.outputs.url }})" >> release.txt
-        echo "::set-output name=status::success"
+    
     - name: 发布至release
-      uses: softprops/action-gh-release@v1
-      if: steps.tag.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      id: release
+      uses: ncipollo/release-action@v1
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: ${{ env.FILE_TIME }} 「 openwrt6.0-X86-64定制版 」
-        tag_name: ${{ steps.tag.outputs.release_tag }}
-        body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        name: ${{ env.FILE_TIME }} 「 openwrt-6.0-X86-64 」
+        allowUpdates: true
+        tag: ${{ env.TAG_TIME }}
+        commit: main
+        token: ${{ secrets.RELEASE_TOKEN }}
+        body: |
+          功能介绍：含Docker、Passwall、bypass、MosDNS、alist网盘挂载工具等插件。
+          [固件源码](https://github.com/coolsnowwolf/lede)
+          由衷感谢所有为openwrt无私奉献的大佬们
+          📥 固件下载
+          🔗 [国外WT网盘](${{ steps.wetransfer.outputs.url }})
+        artifacts: ${{ env.FIRMWARE }}/*
 
     - name: 清理旧的workflow
       uses: GitRML/delete-workflow-runs@main
@@ -195,6 +194,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         
-    - name: TG notification #TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=恭喜主人openwrt5.10定制版固件编译完成！"
+    - name: TG推送
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=编译时间：${{ env.DATE }}%0AOpenWrt 更新信息：${{ env.useVersionInfo }}%0AX86恭喜主人openwrt6.0-lean固件编译完成！"
 

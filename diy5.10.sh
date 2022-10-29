@@ -30,7 +30,7 @@ git clone https://github.com/kiddin9/openwrt-bypass.git package/openwrt-bypass
 sed -i 's/luci-lib-ipkg/luci-base/g' package/openwrt-bypass/luci-app-bypass/Makefile
 git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
 git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
-git clone https://github.com/sbwml/luci-app-alist.git package/luci-app-alist
+# git clone https://github.com/sbwml/luci-app-alist.git package/luci-app-alist
 # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
 # git clone https://github.com/dwj0/luci-app-sms-tool.git package/luci-app-sms-tool

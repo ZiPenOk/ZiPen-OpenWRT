@@ -27,7 +27,7 @@ env:
   DIY_P1_SH: diy5.10.sh
   DIY_P2_SH: diy-part.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: true
+  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
@@ -161,7 +161,7 @@ jobs:
       run: |
         echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
         touch release.txt
-        echo "含Bypass、ADG、Passwall、Openclash、MosDNS等插件。" >> release.txt
+        echo "含阿里云盘、Dockerman、定时重拨、Bypass、Passwall、Openclash、MosDNS、微信推送等插件。" >> release.txt
         echo "[固件源码](https://github.com/coolsnowwolf/lede)" >> release.txt
         echo "由衷感谢所有为openwrt无私奉献的大佬们" >> release.txt
         echo "📥 固件下载" >> release.txt
@@ -178,6 +178,12 @@ jobs:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
+
+    - name: 清理旧的workflow
+      uses: GitRML/delete-workflow-runs@main
+      with:
+        retain_days: 180
+        keep_minimum_runs: 10
 
     - name: 删除旧的Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
