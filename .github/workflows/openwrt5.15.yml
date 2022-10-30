@@ -177,7 +177,7 @@ jobs:
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：含Mosdns、Passwall、定时重拨、bypass、Openclash等插件。其他应用可以自行在应用商店选择安装。
+          功能介绍：含Mosdns、Passwall、bypass等插件。其他应用可以自行在应用商店选择安装。
           [固件源码](https://github.com/immortalwrt/immortalwrt/tree/master)
           由衷感谢所有为openwrt无私奉献的大佬们
           📥 固件下载
