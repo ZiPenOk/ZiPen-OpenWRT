@@ -172,7 +172,7 @@ jobs:
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：含Passwall、bypass、MosDNS等插件。
+          功能介绍：含Passwall、bypass、SSR、MosDNS等插件。
           [固件源码](https://github.com/coolsnowwolf/lede)
           由衷感谢所有为openwrt无私奉献的大佬们
           📥 固件下载
