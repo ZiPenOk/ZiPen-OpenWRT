@@ -26,7 +26,7 @@ git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/lu
 git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
 git clone https://github.com/thinktip/luci-theme-neobird.git package/luci-theme-neobird
 git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme-opentopd
-git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
 # git clone https://github.com/siropboy/sirpdboy-package package/sirpdboy-package
 git clone https://github.com/kiddin9/openwrt-bypass.git package/openwrt-bypass
 sed -i 's/luci-lib-ipkg/luci-base/g' package/openwrt-bypass/luci-app-bypass/Makefile
