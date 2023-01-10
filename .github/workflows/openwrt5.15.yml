@@ -29,8 +29,7 @@ env:
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
-  UPLOAD_COWTRANSFER: false
-  UPLOAD_WETRANSFER: true
+  UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -107,7 +106,7 @@ jobs:
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
-        echo "::set-output name=status::success"
+        echo "status=success" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
@@ -139,7 +138,7 @@ jobs:
         find -name "*esxi.vmdk*" | xargs -i mv -f {} packages
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-        echo "::set-output name=status::success"
+        echo "status=success" >> $GITHUB_OUTPUT
         
     - name: 上传固件到github
       uses: actions/upload-artifact@main
@@ -147,24 +146,15 @@ jobs:
       with:
         name: OpenWrt_5.15${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-
-    - name: 上传固件到NN网盘
-      id: cowtransfer
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
         
-    - name: 上传固件到WT网盘
+    - name: 上传到WeTransfer
       id: wetransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
-        echo "::set-output name=url::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
+        echo "url=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_OUTPUT
         
     - name: 发布至release
       id: release
@@ -177,7 +167,7 @@ jobs:
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：含Mosdns、Passwall、bypass等插件。其他应用可以自行在应用商店选择安装。
+          功能介绍：含Mosdns、Passwall、bypass等插件。
           [固件源码](https://github.com/immortalwrt/immortalwrt/tree/master)
           由衷感谢所有为openwrt无私奉献的大佬们
           📥 固件下载
@@ -185,7 +175,7 @@ jobs:
         artifacts: ${{ env.FIRMWARE }}/*
 
     - name: 清理旧的workflow
-      uses: GitRML/delete-workflow-runs@main
+      uses: FunctionXJB/delete-workflow-runs@main
       with:
         retain_days: 180
         keep_minimum_runs: 10
@@ -200,5 +190,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
     - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=编译时间：${{ env.DATE }}%0AOpenWrt 更新信息：${{ env.useVersionInfo }}%0AX86恭喜主人openwrt5.15固件编译完成！"
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=恭喜主人X86-openwrt5.15自用版固件编译完成！%0A编译时间：${{ env.DATE }}%0A下载地址：https://github.com/ZiPenOk/ZiPen-OpenWRT/releases/tag/${{ env.TAG_TIME }}"
 
