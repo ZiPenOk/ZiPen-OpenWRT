@@ -59,9 +59,3 @@ config host
 	option name 'NAS'
 	option mac '00:11:32:4f:51:05'
 	option ip '10.10.10.200'
-
-config host
-	option dns '1'
-	option name 'MiBox3'
-	option mac '3c:bd:3e:1c:66:97'
-	option ip '10.10.10.210'
