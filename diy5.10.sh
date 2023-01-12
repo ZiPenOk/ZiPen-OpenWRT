@@ -35,6 +35,8 @@ find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 find ./ | grep Makefile | grep mosdns | xargs rm -f
 git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+# git clone https://github.com/gdy666/luci-app-lucky.git package/lucky
 # git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
 # git clone https://github.com/dwj0/luci-app-sms-tool.git package/luci-app-sms-tool
 # git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
