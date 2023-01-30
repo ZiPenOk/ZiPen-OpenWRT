@@ -27,8 +27,8 @@ git clone https://github.com/gngpp/luci-theme-neobird.git package/luci-theme-neo
 git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme-opentopd
 find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 find ./ | grep Makefile | grep mosdns | xargs rm -f
-git clone https://github.com/firkerword/openwrt-mos.git package/openwrt-mos
-# git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
+# git clone https://github.com/firkerword/openwrt-mos.git package/openwrt-mos
+git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
 git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
 git clone https://github.com/sbwml/luci-app-alist.git package/luci-app-alist
 # git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
