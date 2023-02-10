@@ -20,8 +20,6 @@ git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-pass
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 git clone https://github.com/fw876/helloworld.git package/ssr
- find ./ | grep Makefile | grep xray-plugin | xargs rm -f
-svn co https://github.com/sbwml/openwrt_helloworld/trunk/xray-plugin package/xray-plugin
 git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
 git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/luci-theme-edge
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
