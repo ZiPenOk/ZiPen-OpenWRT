@@ -46,7 +46,5 @@ svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/l
 # find ./ | grep Makefile | grep mosdns | xargs rm -f
 # git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
 # git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
- find ./ | grep Makefile | grep xray-plugin | xargs rm -f
-svn co https://github.com/sbwml/openwrt_helloworld/trunk/xray-plugin package/xray-plugin
 
 
