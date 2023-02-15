@@ -177,7 +177,7 @@ jobs:
     - name: 清理旧的workflow
       uses: FunctionXJB/delete-workflow-runs@main
       with:
-        retain_days: 180
+        retain_days: 1
         keep_minimum_runs: 2
 
     - name: 删除旧的Releases
