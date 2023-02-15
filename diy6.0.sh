@@ -11,6 +11,7 @@
 sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.1/g' ./target/linux/x86/Makefile
 # sed -i 's/KERNEL_PATCHVER:=6.1/KERNEL_PATCHVER:=6.2/g' ./target/linux/x86/Makefile
 
+
 # Uncomment a feed source
 # sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
@@ -25,7 +26,7 @@ git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/lu
 git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
 git clone https://github.com/thinktip/luci-theme-neobird.git package/luci-theme-neobird
 git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme-opentopd
-git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 # git clone https://github.com/gdy666/luci-app-lucky.git package/lucky
 # git clone https://github.com/siropboy/sirpdboy-package package/sirpdboy-package
 svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-bypass package/luci-app-bypass
@@ -37,8 +38,8 @@ git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
 # git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
 git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/firkerword/luci-app-parentcontrol.git package/parentcontrol
-git clone https://github.com/linkease/istore.git package/istore
-git clone https://github.com/linkease/istore-ui.git package/istore-ui
+# git clone https://github.com/linkease/istore.git package/istore
+# git clone https://github.com/linkease/istore-ui.git package/istore-ui
 # svn co https://github.com/kiddin9/openwrt-packages/trunk/adguardhome package/adguardhome
 # svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome package/luci-app-adguardhome
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
