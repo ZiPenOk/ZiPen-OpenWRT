@@ -30,7 +30,7 @@ git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-pass
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
-# git clone https://github.com/sbwml/luci-app-alist.git package/luci-app-alist
+git clone https://github.com/sbwml/luci-app-alist.git package/luci-app-alist
 git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 # git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 # git clone https://github.com/gdy666/luci-app-lucky.git package/lucky
