@@ -39,7 +39,8 @@ git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
 git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/firkerword/luci-app-parentcontrol.git package/parentcontrol
 git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
-git clone https://github.com/immortalwrt/homeproxy.git package/luci-app-homeproxy
+git clone -b v5-dev https://github.com/sbwml/luci-app-mosdns.git package/mosdns
+# git clone https://github.com/immortalwrt/homeproxy.git package/luci-app-homeproxy
 # git clone https://github.com/linkease/istore.git package/istore
 # git clone https://github.com/linkease/istore-ui.git package/istore-ui
 # svn co https://github.com/kiddin9/openwrt-packages/trunk/adguardhome package/adguardhome
