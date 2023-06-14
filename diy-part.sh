@@ -20,7 +20,7 @@ curl -fsSL  https://raw.githubusercontent.com/firkerword/KPR/main/logo.jpg > ./p
 sed -i 's/192.168.1.1/10.10.10.10/g' package/base-files/files/bin/config_generate
 sed -i 's/luci-theme-bootstrap/luci-theme-opentomcat/g' ./feeds/luci/collections/luci/Makefile
 # rm -rf ./feeds/luci/applications/luci-app-qbittorrent
-rm -rf ./feeds/luci/applications/luci-app-serverchan
+rm -rf ./feeds/luci/applications/luci-app-wechatpush
 rm -rf ./feeds/luci/applications/luci-app-mosdns
 # rm -rf ./package/diy-ziyong/adguardhome
 rm -rf ./package/diy-ziyong/smartdns

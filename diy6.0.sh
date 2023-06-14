@@ -41,16 +41,17 @@ git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/firkerword/luci-app-parentcontrol.git package/parentcontrol
 git clone https://github.com/firkerword/luci-app-smartdns.git package/luci-app-smartdns
 git clone https://github.com/firkerword/smartdns.git package/smartdns
-git clone https://github.com/firkerword/luci-app-mosdns.git package/OpenWrt-mosdns
+# git clone https://github.com/firkerword/luci-app-mosdns.git package/OpenWrt-mosdns
 # git clone https://github.com/immortalwrt/homeproxy.git package/luci-app-homeproxy
 # git clone https://github.com/linkease/istore.git package/istore
 # git clone https://github.com/linkease/istore-ui.git package/istore-ui
 # svn co https://github.com/kiddin9/openwrt-packages/trunk/adguardhome package/adguardhome
 # svn co https://github.com/kiddin9/openwrt-packages/trunk/luci-app-adguardhome package/luci-app-adguardhome
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
-# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-# find ./ | grep Makefile | grep mosdns | xargs rm -f
-# git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
-# git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+
+git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 
