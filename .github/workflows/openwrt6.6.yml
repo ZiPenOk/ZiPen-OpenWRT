@@ -23,9 +23,9 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 6.0D.config
-  DIY_P1_SH: diy6.0.sh
-  DIY_P2_SH: diy-part2.sh
+  CONFIG_FILE: 5.15.config
+  DIY_P1_SH: diy6.6.sh
+  DIY_P2_SH: diy-part.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
@@ -183,7 +183,7 @@ jobs:
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：含ADG、Docker、Passwall、openclash、SSR、MosDNS、lucky、定时设置、应用过滤等插件。
+          功能介绍：含Docker、Passwall、MosDNS、lucky、定时设置等插件。
           [固件源码](https://github.com/coolsnowwolf/lede)
           由衷感谢所有为openwrt无私奉献的大佬们
           📥 固件下载
@@ -191,13 +191,14 @@ jobs:
         artifacts: ${{ env.FIRMWARE }}/*
 
     - name: 清理旧的workflow
-      uses: FunctionXJB/delete-workflow-runs@main
+      uses: Mattraks/delete-workflow-runs@v2
       with:
+        token: ${{ secrets.RELEASE_TOKEN }}
         retain_days: 180
         keep_minimum_runs: 5
 
     - name: 删除旧的Releases
-      uses: dev-drprasad/delete-older-releases@v0.1.0
+      uses: dev-drprasad/delete-older-releases@v0.3.2
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 4
@@ -206,5 +207,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         
     - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🅰️恭喜主人X86-openwrt6.6自用版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/firkerword/openwrt-Exclusive/releases/tag/${{ env.TAG_TIME }}"
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥恭喜主人X86-openwrt5.15自用版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/firkerword/openwrt-Exclusive/releases/tag/${{ env.TAG_TIME }}"
 
