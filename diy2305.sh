@@ -12,9 +12,9 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 sed -i 's/KERNEL_PATCHVER:=6.1/KERNEL_PATCHVER:=6.6/g' ./target/linux/x86/Makefile
 sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.6/g' ./target/linux/x86/Makefile
-sed -i '/luci/d' feeds.conf.default
+# sed -i '/luci/d' feeds.conf.default
 # echo 'src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-23.05' >>feeds.conf.default
-sed -i '2i src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-23.05' feeds.conf.default
+# sed -i '2i src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-23.05' feeds.conf.default
 
 # Add a feed source
 function merge_package(){
@@ -33,6 +33,7 @@ rm -rf package/custom; mkdir package/custom
 
 # git clone https://github.com/fw876/helloworld.git package/ssr
 git clone https://github.com/firker/diy-ziyong -b 2305 package/diy-ziyong
+# merge_package https://github.com/firker/diy-ziyong diy-ziyong/wrtbwmon
 git clone https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon
 git clone https://github.com/jerrykuku/luci-app-argon-config.git  package/luci-app-argon-config
 # find ./ | grep Makefile | grep mosdns | xargs rm -f

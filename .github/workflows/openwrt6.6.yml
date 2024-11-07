@@ -187,7 +187,7 @@ jobs:
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：含Docker、Passwall、MosDNS、lucky、定时设置等插件。
+          功能介绍：含Passwall、MosDNS等插件。
           [固件源码](https://github.com/coolsnowwolf/lede)
           由衷感谢所有为openwrt无私奉献的大佬们
           📥 固件下载
