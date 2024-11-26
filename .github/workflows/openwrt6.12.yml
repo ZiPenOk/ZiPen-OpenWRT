@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt-lede6.6
+name: OpenWrt-lede6.12
 
 on:
   repository_dispatch:
@@ -24,7 +24,7 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: 5.15.config
-  DIY_P1_SH: diy6.6.sh
+  DIY_P1_SH: diy6.12.sh
   DIY_P2_SH: diy-part.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
@@ -75,7 +75,7 @@ jobs:
         df -hT
 
     - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥X86-openwrt6.6自用版固件开刷编译，请耐心等待！"
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥X86-openwrt6.12自用版固件开刷编译，请耐心等待！"
 
     - name: 下载固件源码
       working-directory: /mnt/workdir
@@ -163,7 +163,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_6.6D${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt_6.12D${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
 
@@ -181,7 +181,7 @@ jobs:
       uses: ncipollo/release-action@v1
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: ${{ env.FILE_TIME }} 「 openwrt-6.6-X86-64 」
+        name: ${{ env.FILE_TIME }} 「 openwrt-6.12-X86-64 」
         allowUpdates: true
         tag: ${{ env.TAG_TIME }}
         commit: main
@@ -211,5 +211,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         
     - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥恭喜主人X86-openwrt5.15自用版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/ZiPenOk/ZiPen-OpenWRT/releases/tag/${{ env.TAG_TIME }}"
-
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥恭喜主人X86-openwrt6.12自用版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/ZiPenOk/ZiPen-OpenWRT/releases/tag/${{ env.TAG_TIME }}"
