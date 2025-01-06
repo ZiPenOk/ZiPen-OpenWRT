@@ -10,7 +10,7 @@
 
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
-sed -i 's/KERNEL_PATCHVER:=6.1/KERNEL_PATCHVER:=6.6/g' ./target/linux/x86/Makefile
+sed -i 's/KERNEL_PATCHVER:=6.6/KERNEL_PATCHVER:=6.12/g' ./target/linux/x86/Makefile
 sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=6.6/g' ./target/linux/x86/Makefile
 # sed -i '/luci/d' feeds.conf.default
 # echo 'src-git luci https://github.com/coolsnowwolf/luci.git;openwrt-23.05' >>feeds.conf.default
@@ -36,6 +36,7 @@ git clone https://github.com/firker/diy-ziyong -b 2305 package/diy-ziyong
 # merge_package https://github.com/firker/diy-ziyong diy-ziyong/wrtbwmon
 git clone https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon
 git clone https://github.com/jerrykuku/luci-app-argon-config.git  package/luci-app-argon-config
+git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git  package/luci-theme-kucat
 # find ./ | grep Makefile | grep mosdns | xargs rm -f
 # git clone https://github.com/firkerword/openwrt-mos.git package/openwrt-mos
 # git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
@@ -50,8 +51,8 @@ find ./ | grep Makefile | grep mosdns | xargs rm -f
 git clone https://github.com/sbwml/luci-app-mosdns.git package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 git clone https://github.com/tty228/luci-app-wechatpush.git package/luci-app-serverchan
-# git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
-git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
+# git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 chmod 755 ./package/lucky/luci-app-lucky/root/usr/bin/luckyarch
 git clone https://github.com/linkease/nas-packages-luci.git package/nas-packages-luci
 git clone https://github.com/linkease/nas-packages.git package/nas-packages
