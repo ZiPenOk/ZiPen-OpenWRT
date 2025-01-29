@@ -57,5 +57,5 @@ config host
 config host
 	option dns '1'
 	option name 'NAS'
-	option mac '00:11:32:4f:51:05'
+	option mac '00:e0:4c:69:01:26'
 	option ip '10.10.10.200'
