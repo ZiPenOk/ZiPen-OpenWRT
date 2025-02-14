@@ -35,6 +35,8 @@ git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/luc
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
 git clone https://github.com/gngpp/luci-theme-neobird.git package/luci-theme-neobird
 git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme-opentopd
+git clone https://github.com/sirpdboy/luci-app-advancedplus.git package/luci-app-advancedplus
+git clone https://github.com/sirpdboy/luci-app-parentcontrol.git package/luci-app-parentcontrol
 # find ./ | grep Makefile | grep mosdns | xargs rm -f
 # git clone https://github.com/firkerword/openwrt-mos.git package/openwrt-mos
 # git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
