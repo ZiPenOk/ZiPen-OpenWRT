@@ -31,28 +31,10 @@ config dhcp 'wan'
 	option ignore '1'
 
 config host
-	option dns '1'
-	option ip '10.10.10.12'
-	option mac '0c:9d:92:4f:da:50'
-	option name 'AC66U-B1-Room'
-
-config host
-	option dns '1'
-	option mac '88:d7:f6:6a:c7:80'
-	option ip '10.10.10.13'
-	option name 'AC66U-B1-Parlor'
-
-config host
 	option name 'PC'
 	option dns '1'
 	option mac '70:85:c2:65:f0:36'
 	option ip '10.10.10.120'
-
-config host
-	option name 'PC-TP'
-	option dns '1'
-	option mac '08:1F:71:24:59:31'
-	option ip '10.10.10.130'
 
 config host
 	option dns '1'
