@@ -42,15 +42,17 @@ git clone https://github.com/sirpdboy/luci-app-parentcontrol.git package/luci-ap
 # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
 git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
 # git clone -b luci-smartdns-new-version https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 # git clone https://github.com/firkerword/luci-app-mosdns.git package/mosdns
 # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
-# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-# find ./ | grep Makefile | grep mosdns | xargs rm -f
-# git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua package/mosdns
+find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua package/mosdns
 # git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 git clone https://github.com/firkerword/luci-app-serverchan.git package/luci-app-serverchan
 git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 # git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 chmod 755 ./package/lucky/luci-app-lucky/root/usr/bin/luckyarch
 # git clone https://github.com/liudf0716/luci-app-apfree-wifidog.git package/wifidog
+merge_package https://github.com/vernesong/OpenClash OpenClash/luci-app-openclash
