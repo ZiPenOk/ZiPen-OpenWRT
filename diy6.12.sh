@@ -42,7 +42,7 @@ git clone https://github.com/sirpdboy/luci-app-parentcontrol.git package/luci-ap
 # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
 git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
+# git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
 # git clone -b luci-smartdns-new-version https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 # git clone https://github.com/firkerword/luci-app-mosdns.git package/mosdns
 # git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
