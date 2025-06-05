@@ -37,24 +37,17 @@ git clone https://github.com/firker/diy-ziyong -b 2305 package/diy-ziyong
 git clone https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon
 git clone https://github.com/jerrykuku/luci-app-argon-config.git  package/luci-app-argon-config
 git clone -b js https://github.com/sirpdboy/luci-theme-kucat.git  package/luci-theme-kucat
-# find ./ | grep Makefile | grep mosdns | xargs rm -f
-# git clone https://github.com/firkerword/openwrt-mos.git package/openwrt-mos
-# git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
-# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/openwrt-nikki
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
 git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone https://github.com/sirpdboy/luci-app-advancedplus.git package/luci-app-advancedplus
+git clone https://github.com/sirpdboy/luci-app-taskplan package/luci-app-taskplan
 # git clone -b luci-smartdns-new-version https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-# git clone https://github.com/firkerword/luci-app-mosdns.git package/mosdns
-# git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
-find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-find ./ | grep Makefile | grep mosdns | xargs rm -f
-git clone https://github.com/sbwml/luci-app-mosdns.git package/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 git clone https://github.com/tty228/luci-app-wechatpush.git package/luci-app-serverchan
-git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
-# git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
 chmod 755 ./package/lucky/luci-app-lucky/root/usr/bin/luckyarch
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
 git clone https://github.com/linkease/nas-packages-luci.git package/nas-packages-luci
 git clone https://github.com/linkease/nas-packages.git package/nas-packages
 git clone https://github.com/linkease/istore.git package/istore
