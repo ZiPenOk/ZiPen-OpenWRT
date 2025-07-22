@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: OpenWrt-lede6.12
+name: OpenWrt-lede6.12-2410
 
 on:
   repository_dispatch:
@@ -17,15 +17,15 @@ on:
         required: false
         default: 'false'
 #  schedule:
-#    - cron: 0 20 */3 * *  
+#    - cron: 0 18 */3 * * 
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: 5.15.config
-  DIY_P1_SH: diy6.12.sh
-  DIY_P2_SH: diy-part.sh
+  CONFIG_FILE: 2305.config
+  DIY_P1_SH: diy2305.sh
+  DIY_P2_SH: diy-part2305-2.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
@@ -62,6 +62,10 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         df -hT
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+        sudo docker image prune --all --force
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL https://github.com/firkerword/openwrt-list/raw/master/depends-ubuntu-2004)
         sudo -E apt-get -qq autoremove --purge
@@ -72,7 +76,7 @@ jobs:
         df -hT
 
     - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥X86-openwrt6.12自用版固件开刷编译，请耐心等待！"
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🔥X86-openwrt2305自用版固件开刷编译，请耐心等待！"
 
     - name: 下载固件源码
       working-directory: /mnt/workdir
@@ -160,7 +164,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_6.12D${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt_62410${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
 
@@ -175,31 +179,30 @@ jobs:
     
     - name: 发布至release
       id: release
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@v1.14.0
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        name: ${{ env.FILE_TIME }} 「 openwrt-6.12-X86-64 」
+        name: ${{ env.FILE_TIME }} 「 openwrt-2410-X86-64 」
         allowUpdates: true
         tag: ${{ env.TAG_TIME }}
         commit: main
         token: ${{ secrets.RELEASE_TOKEN }}
         body: |
-          功能介绍：含Passwall、MosDNS等插件。
+          功能介绍：该版本luci为2410，内核版本6.12，目前包含passwall、mosdns、Docker、lucky、微信推送等基础插件，其他功能可以用docker来实现，满足普通用户使用了。
           [固件源码](https://github.com/coolsnowwolf/lede)
           由衷感谢所有为openwrt无私奉献的大佬们
           📥 固件下载
-          🔗 [国外WT网盘](${{ steps.wetransfer.outputs.url }})
         artifacts: ${{ env.FIRMWARE }}/*
 
     - name: 清理旧的workflow
-      uses: Mattraks/delete-workflow-runs@v2
+      uses: Mattraks/delete-workflow-runs@main
       with:
         token: ${{ secrets.RELEASE_TOKEN }}
         retain_days: 180
         keep_minimum_runs: 5
 
     - name: 删除旧的Releases
-      uses: dev-drprasad/delete-older-releases@v0.3.2
+      uses: dev-drprasad/delete-older-releases@master
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 4
@@ -208,4 +211,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         
     - name: TG推送
-      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🅰️恭喜主人X86-openwrt6.12自用版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/ZiPenOk/ZiPen-OpenWRT/releases/tag/${{ env.TAG_TIME }}"
+      run: curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=🅰️恭喜主人X86-openwrt2410自用版固件编译完成！🎉%0A⏰编译时间：${{ env.DATE }}%0A📥下载地址：https://github.com/ZiPenOk/ZiPen-OpenWRT/releases/tag/${{ env.TAG_TIME }}"
+

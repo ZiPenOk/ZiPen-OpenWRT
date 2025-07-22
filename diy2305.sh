@@ -52,4 +52,7 @@ git clone https://github.com/linkease/nas-packages-luci.git package/nas-packages
 git clone https://github.com/linkease/nas-packages.git package/nas-packages
 git clone https://github.com/linkease/istore.git package/istore
 # sed -i 's/luci-lib-ipkg/luci-base/g' package/istore/luci/luci-app-store/Makefile
+# git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
+merge_package https://github.com/vernesong/OpenClash OpenClash/luci-app-openclash
+
 
