@@ -30,29 +30,18 @@ rm -rf package/custom; mkdir package/custom
 # Add a feed source
 # git clone https://github.com/fw876/helloworld.git package/ssr
 git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
-git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/luci-theme-edge
+# git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/luci-theme-edge
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
-git clone https://github.com/gngpp/luci-theme-neobird.git package/luci-theme-neobird
-git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme-opentopd
-git clone https://github.com/sirpdboy/luci-app-advancedplus.git package/luci-app-advancedplus
-git clone https://github.com/sirpdboy/luci-app-parentcontrol.git package/luci-app-parentcontrol
-# find ./ | grep Makefile | grep mosdns | xargs rm -f
-# git clone https://github.com/firkerword/openwrt-mos.git package/openwrt-mos
-# git clone https://github.com/QiuSimons/openwrt-mos.git package/openwrt-mos
-# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+# git clone https://github.com/sirpdboy/luci-app-advancedplus.git package/luci-app-advancedplus
+# git clone https://github.com/sirpdboy/luci-app-parentcontrol.git package/luci-app-parentcontrol
+git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/openwrt-nikki
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
 git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+# git clone -b luci-smartdns-new-version https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 # git clone -b master https://github.com/vernesong/OpenClash.git package/OpenClash
 merge_package https://github.com/vernesong/OpenClash OpenClash/luci-app-openclash
-# git clone -b luci-smartdns-new-version https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-# git clone https://github.com/firkerword/luci-app-mosdns.git package/mosdns
-# git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
-# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-# find ./ | grep Makefile | grep mosdns | xargs rm -f
-# git clone https://github.com/sbwml/luci-app-mosdns -b v5-lua package/mosdns
-# git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-git clone https://github.com/firkerword/luci-app-serverchan.git package/luci-app-serverchan
+git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/openwrt-nikki
 git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
-# git clone https://github.com/firkerword/luci-app-lucky.git package/lucky
 chmod 755 ./package/lucky/luci-app-lucky/root/usr/bin/luckyarch
-# git clone https://github.com/liudf0716/luci-app-apfree-wifidog.git package/wifidog
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+git clone https://github.com/sbwml/luci-app-mosdns package/mosdns
