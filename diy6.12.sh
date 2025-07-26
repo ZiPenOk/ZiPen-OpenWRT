@@ -31,7 +31,7 @@ rm -rf package/custom; mkdir package/custom
 # git clone https://github.com/fw876/helloworld.git package/ssr
 git clone https://github.com/firker/diy-ziyong.git package/diy-ziyong
 # git clone -b 18.06 https://github.com/garypang13/luci-theme-edge.git package/luci-theme-edge
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
+# git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git  package/luci-theme-argon-18.06
 # git clone https://github.com/sirpdboy/luci-app-advancedplus.git package/luci-app-advancedplus
 # git clone https://github.com/sirpdboy/luci-app-parentcontrol.git package/luci-app-parentcontrol
 git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/openwrt-nikki
