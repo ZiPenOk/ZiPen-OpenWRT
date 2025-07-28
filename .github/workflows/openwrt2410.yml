@@ -179,7 +179,7 @@ jobs:
     
     - name: 发布至release
       id: release
-      uses: ncipollo/release-action@v1.14.0
+      uses: ncipollo/release-action@main
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         name: ${{ env.FILE_TIME }} 「 openwrt-2410-X86-64 」
