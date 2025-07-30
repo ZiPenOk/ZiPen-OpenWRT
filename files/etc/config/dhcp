@@ -1,0 +1,52 @@
+
+config dnsmasq
+	option domainneeded '1'
+	option localise_queries '1'
+	option rebind_protection '1'
+	option rebind_localhost '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option authoritative '1'
+	option readethers '1'
+	option leasefile '/tmp/dhcp.leases'
+	option nonwildcard '1'
+	option localservice '1'
+	option ednspacket_max '1232'
+	option localuse '1'
+	option filter_aaaa '1'
+	option noresolv '0'
+	option resolvfile '/tmp/resolv.conf.d/resolv.conf.auto'
+	option cachesize '8192'
+
+config dhcp 'lan'
+	option interface 'lan'
+	option start '100'
+	option limit '150'
+	option leasetime '12h'
+	option dhcpv4 'server'
+	option ra_slaac '1'
+	list ra_flags 'managed-config'
+	list ra_flags 'other-config'
+
+config dhcp 'wan'
+	option interface 'wan'
+	option ignore '1'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+	option loglevel '4'
+
+config host
+	option name 'PC'
+	option dns '1'
+	option mac '70:85:c2:65:f0:36'
+	option ip '10.10.10.120'
+
+config host
+	option dns '1'
+	option name 'NAS'
+	option mac '00:e0:4c:69:01:26'
+	option ip '10.10.10.200'
