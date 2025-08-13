@@ -26,4 +26,5 @@ config interface 'wan'
 	option password '1234567890'
 	option keepalive '0'
 	option ipv6 '0'
+	option macaddr '00:0C:29:18:DA:6C'
 
